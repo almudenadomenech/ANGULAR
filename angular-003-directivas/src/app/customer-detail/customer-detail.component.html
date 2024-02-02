@@ -1,0 +1,16 @@
+@if (customer){
+    <div [ngClass]="customer.active ? 'is-active' : 'is-not-active'">
+        <p><strong>ID:</strong> {{customer.id}}</p>
+        <p><strong>First Name:</strong> {{customer.firstName}}</p>
+        <p><strong>Email:</strong> {{customer.email}}</p>
+        <p><strong>Nif:</strong> {{customer.nif}}</p>
+        <p><strong>Birthday:</strong> {{customer.birthday}}</p>
+        <p><strong>Active:</strong> {{customer.active}}</p>
+    
+    </div>
+   
+        
+} @else {
+    <p>No se ha encontrado el cliente</p>
+}
+

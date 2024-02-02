@@ -1,0 +1,15 @@
+
+.is-active {
+    color: green;
+    border: 2px solid green;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
+.is-not-active {
+    color: red;
+    border: 2px solid red;
+    border-radius: 10px;
+    padding: 10px;
+}

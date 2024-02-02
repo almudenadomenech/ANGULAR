@@ -1,0 +1,66 @@
+<p>{{nombres}}</p>
+
+<!-- Bucle for -->
+<ul>
+    <li *ngFor="let nombre of nombres">
+        {{nombre}}
+    </li>
+</ul>
+<!-- Pra acceder al índice -->
+<ul>
+    <li *ngFor="let nombre of nombres; let i= index">
+        {{i}} {{nombre}}
+    </li>
+</ul>
+
+<ul>
+    @for (nombre of nombres; track nombre) {
+    <li>
+        {{nombre}}
+    </li> 
+    }@empty {
+        <li>No se han encontrado elementos.</li>
+    }
+       
+</ul>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Price</th>
+    </tr>
+
+    <table>
+
+        <tr>
+          <th>Título</th>
+          <th>Precio</th>
+        </tr>
+      
+        @for (producto of productos; track producto) {
+          <tr>
+            <td>{{producto.title}}</td>
+            <td>{{producto.price}}</td>
+          </tr>
+        }
+      
+      </table>
+      <table>
+
+        <tr>
+          <th>Título</th>
+          <th>Precio</th>
+        </tr>
+      
+        @for (producto of productos; track producto) {
+          <tr>
+            <td>{{producto.title}}</td>
+            <td>{{producto.price}}</td>
+          </tr>
+        }
+      
+      </table>
+</table>
+
+
+
