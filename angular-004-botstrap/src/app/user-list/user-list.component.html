@@ -1,0 +1,54 @@
+<h1>Página web con bootstrap</h1>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+    <!-- Escribir tabla de bootstrap -->
+      <table class="table">
+        <thead>
+           <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Email</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Active</th>
+            <th scope="col">Register Date</th>
+            <th scope="col">Acciones</th>
+                    
+                    
+            </tr>
+              </thead>
+                <tbody>
+                    @for (user of users; track user) {
+                     
+                    <tr>
+                      <th scope="row">{{user.id}}</th>
+                      <td>
+                        <a href="mailto:{{user.email}}">{{user.email}}</a>
+                      </td>
+                      <td 
+                      [ngStyle]="{color: user.salary <= 1000 ? 'green' : 'red'}"
+                      >{{user.salary}}</td>
+                      <td [ngStyle]="{color:user.active ? 'green' : 'red'}"
+                      >{{user.active}}</td>
+                      <td>{{user.registerDate | date: 'dd/MM/yyyy'}}</td>
+                      <td>
+                        <button type="button" class="btn btn-primary me-2">Ver</button>
+                        <button type="button" class="btn btn-success me-2">Editar</button>
+                        <button type="button" class="btn btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+                    }
+                  
+                 
+                </tbody>
+              </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
