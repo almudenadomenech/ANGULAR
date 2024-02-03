@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="mt-5">Listado de Restaurantes <i class="bi bi-cake2"></i></h1>
+        <table class="table table-striped mt-5">
+          <thead>
+             <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Imagen</th>
+              <th scope="col">Name</th>
+              <th scope="col">Location</th>
+              <th scope="col">Rating</th>
+              <th scope="col">Phone</th>
+              </tr>
+  
+                </thead>
+                  <tbody>
+                      @for (restaurant of restaurants; track restaurant.id) { 
+                      <tr>
+                        <td>{{restaurant.id}}</td>
+                        <td>
+                        <!-- Si pinchas en la imagen te lleva a los detalles, es igual que el boton pero
+                        desde la imagen -->
+                          <a 
+                            [routerLink]="['/restaurantes', restaurant.id, 'detalle']">
+                            <img style="max-width: 100px;" [src]="restaurant.imageUrl">
+                          </a>  
+                        </td>
+                        <td>{{restaurant.name}}</td>
+                        <td>{{restaurant.location}}</td>
+                        <td>{{restaurant.rating}}</td>
+                        <td>{{restaurant.phone}}</td>
+                        <td>
+                          <!-- La misma funcion que en el comentario de arriba pero con el botón -->
+                          <button type="button" class="btn btn-success me-2" 
+                          [routerLink]="['/restaurantes', restaurant.id, 'detalle']">
+                          <i class="bi bi-eye"></i>
+                          Ver detalle</button>
+                          
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-primary" 
+                          [routerLink]="['/restaurantes', restaurant.id, 'reservas']" >
+                          <i class="bi bi-ticket-perforated"></i>
+                          Hacer reserva</button>
+                          
+                          
+                        </td>
+                      </tr>
+                      }
+  
+                    
+                   
+                  </tbody>
+                </table>
+  
+          </div>
+  
+      </div>
+  
+  </div>
+  
+  
+  
+  
+  

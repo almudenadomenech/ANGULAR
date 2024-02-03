@@ -1,0 +1,58 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-4 text-center">
+            @if(restaurant && restaurant.imageUrl && restaurant.imageUrl.length){
+                <!-- para hacer que la imagen sea responsive -->
+                <img class="img-fluid"  [src]="restaurant.imageUrl" alt="Foto resaurante">
+            } @else {
+                <!-- <p class="py-5">Este restaurante no tiene imagen.</p> -->
+                <!-- imagen por defecto -->
+                <img class="img-fluid" src="http://avatars.com/api/?name=A&size=256">
+            }
+        </div>
+        <div class="col-8">
+
+            @if(restaurant){
+                
+                <div class="container px-4 py-5" id="icon-grid">
+                <h2 class="pb-2 border-bottom">Restaurante con id {{restaurant.id}}</h2>
+                
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+                <div class="col d-flex align-items-start">
+                  <i class="bi bi-geo-alt text-primary flex-shrink-0 me-3"></i>
+                <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Ubicación</h3>
+                <p>{{restaurant.location}}</p>
+                </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-phone text-primary flex-shrink-0 me-3"></i>
+                <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Teléfono</h3>
+                <p>{{restaurant.phone}}</p>
+                </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"></use></svg>
+                <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Puntuación</h3>
+                <p>{{restaurant.rating}}</p>
+                </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#home"></use></svg>
+                <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Nombre empresa</h3>
+                <p>{{restaurant.name}}</p>
+                </div>
+                </div>
+                </div>
+            </div>
+        }@else {
+            <p>Restaurante no encontrado.</p>
+        }
+        </div>
+        
+    </div>
+</div>
+
