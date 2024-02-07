@@ -1,0 +1,16 @@
+<p>product-list works!</p>
+<button (click)="imprimirHola()" >Imprimir Hola</button>
+<button (click)="imprimirProducto()" >Imprimir Producto</button>
+<button (click)="crearProducto()" >Crear Producto</button>
+<button (click)="actualizarProducto()" >Actualizar Producto</button>
+<button (click)="borrarProducto()" >Borrar Producto</button>
+
+<ul>
+    @for (product of products; track product.id) {
+
+        <li>{{product.title}}</li>
+        <li>{{product.category}}</li>
+        
+
+    }
+</ul>

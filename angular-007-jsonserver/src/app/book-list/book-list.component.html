@@ -1,0 +1,48 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+      <h1 class="mt-5">Listado de libros <i class="bi bi-book"></i></h1>
+      <table class="table table-striped mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Foto</th>
+            <th scope="col">Título</th>
+            <th scope="col">Sinopsis</th>
+            <th scope="col">Fecha release</th>
+            <th scope="col">Páginas</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(book of books; track book.id) {
+            <tr>
+                <td>{{book.id}}</td>
+                <td>
+                  <a [routerLink]="['/libros', book.id, 'detalle']">
+                    <img style="max-width:100px;" [src]="book.photo">
+                  </a>
+
+                </td>
+                <td>{{book.title}}</td>
+                <td>{{book.sinopsis}}</td>
+                <td>{{book.release}}</td>
+                <td>{{book.numPages}}</td>
+                <td>{{book.price}}</td>
+                <td>
+                  <button class="btn btn-success me-2"
+                  [routerLink]="['/libros', book.id, 'detalle']">
+                  <i class="bi bi-eye"></i>
+                  Ver detalle</button>
+
+                </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

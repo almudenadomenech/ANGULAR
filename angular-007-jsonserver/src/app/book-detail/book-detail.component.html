@@ -1,0 +1,67 @@
+
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-4 text-center">
+
+      @if (book && book.photo && book.photo.length > 0){
+        <img class="img-fluid" [src]="book.photo" alt="Foto libro">
+      } @else {
+        <!--<p class="py-5">Este restaurante no tiene imagen de perfil.</p>-->
+        <img class="img-fluid" src="https://ui-avatars.com/api/?name=A&size=256">
+      }
+
+    </div>
+    <div class="col-8">
+
+      @if(book){
+      <div class="container px-4 py-5" id="icon-grid">
+        <h2 class="pb-2 border-bottom">Libro con id {{book.id}}</h2>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 py-5">
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-geo-alt text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Título</h3>
+              <p>{{book.title}}</p>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-phone text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Sinopsis</h3>
+              <p>{{book.sinopsis}}</p>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-cup-straw text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Release</h3>
+              <p>{{book.release}}</p>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-cup-straw text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Páginas</h3>
+              <p>{{book.numPages}}</p>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-cup-straw text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Precio</h3>
+              <p>{{book.price}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    } @else {
+      <p>Restaurante no encontrado.</p>
+    }
+    </div>
+  </div>
+</div>
+
+

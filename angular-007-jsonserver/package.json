@@ -1,5 +1,5 @@
 {
-  "name": "angular-006-servicios",
+  "name": "angular-007-jsonserver",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -22,7 +22,6 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.3",
-    "json-server": "^1.0.0-alpha.23",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
