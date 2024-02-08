@@ -1,1 +1,52 @@
-<p>author-list works!</p>
+
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+  
+        <h1 class="mt-5">Listado de Author <i class="bi bi-people-fill"></i></h1>
+        <table class="table table-striped mt-2">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Foto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Biografía</th>
+              <th scope="col">Nacimiento</th>
+              <th scope="col">Ciudad</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(author of authors; track author.id) {
+              <tr>
+                  <td>{{author.id}}</td>
+                  <td>
+                    <a [routerLink]="['/autores', author.id, 'detalle']">
+                      <img style="max-width:100px;" [src]="author.photo">
+                    </a>
+  
+                  </td>
+                  <td>{{author.fullName}}</td>
+                  <td>{{author.bio}}</td>
+                  <td>{{author.birthday | date:'dd/MM/yy'}}</td>
+                  <td>{{author.city}}</td>
+                 
+                  <td>
+                    <button class="btn btn-success me-2 my-2"
+                    [routerLink]="['/autores', author.id, 'detalle']">
+                    <i class="bi bi-eye"></i>
+                    Ver detalle</button>
+
+                  <!-- Botón borrar autor -->
+                  <button class="btn btn-danger" (click)="deleteAuthor(author.id)">
+                    <i class="bi bi-trash"></i>Borrar
+                  </button>
+                  </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

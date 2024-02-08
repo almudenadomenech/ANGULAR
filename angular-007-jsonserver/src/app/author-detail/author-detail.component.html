@@ -1,1 +1,69 @@
-<p>author-detail works!</p>
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-4 text-center">
+       
+        <div>
+            @if (author && author.photo && author.photo.length > 0){
+            <img class="img-fluid" [src]="author.photo" alt="Foto autor">
+
+            <div>
+            <button class="btn btn-danger my-2" (click)="deleteAuthor()">
+                <i class="bi bi-trash"></i>Borrar
+            </button>
+            </div>
+
+            } @else {
+             <img class="img-fluid" src="https://ui-avatars.com/api/?name=A&size=256">
+            }
+  
+      </div>
+      </div>
+      <div class="col-8">
+  
+        @if(author){
+        <div class="container px-4 py-5" id="icon-grid">
+          <h2 class="pb-2 border-bottom">Author con id {{author.id}}</h2>
+  
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 py-5">
+            <div class="col d-flex align-items-start">
+              <i class="bi bi-geo-alt text-info flex-shrink-0 me-3 fs-2"></i>
+              <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Nombre completo</h3>
+                <p>{{author.fullName}}</p>
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <i class="bi bi-phone text-info flex-shrink-0 me-3 fs-2"></i>
+              <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Biografia</h3>
+                <p>{{author.bio}}</p>
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <i class="bi bi-cup-straw text-info flex-shrink-0 me-3 fs-2"></i>
+              <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Fecha de nacimiento</h3>
+                <p>{{author.birthday | date:'dd/MM/yy'}}</p>
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <i class="bi bi-cup-straw text-info flex-shrink-0 me-3 fs-2"></i>
+              <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Lugar de nacimiento</h3>
+                <p>{{author.city}}</p>
+              </div>
+            </div>
+            
+            </div>
+          </div>
+  
+      } @else {
+        <p>Restaurante no encontrado.</p>
+      }
+      </div>
+    </div>
+  </div>
+  
+  
+  

@@ -94,7 +94,7 @@ db.json
 
 3. Ejecutar backend json server (levantar el servidor)
 
-json-server --watch db.json
+json-server db.json
 
 
 
