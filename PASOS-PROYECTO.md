@@ -41,4 +41,7 @@ no hace falta hacerlos todos de golpe.
 1. Crear una carpeta dentro de app
 2. Crear las rutas en el app.component.htm en el navbar
 
-## PASO 9: 
+## PASO 9: HACER FORMULARIOS
+
+en el ts del componente en imports
+ReactiveFormsModule

@@ -1,0 +1,87 @@
+<!-- Para vincularlo con el Ts -->
+
+<form [formGroup]="bookForm" (ngSubmit)="save()">
+
+    <div>
+        <label for="title">Título del libro</label>
+        <input type="text" id="title" formControlName="title">
+    </div>
+    
+    <div>
+        <label for="numPages">Número de Páginas</label>
+        <input type="number" id="numPages" formControlName="numPages"
+        min="5" step="1">
+    </div>
+
+    <div>
+        <label for="price">Precio en Euros</label>
+        <input type="number" id="price" formControlName="price"
+        min="5" step="0.01">
+    </div>
+
+    <div>
+        <label for="available">Está disponible para la venta (Si / No)</label>
+        <input type="checkbox" id="available" formControlName="available">
+    </div>
+
+    <div>
+        <label for="publishDate">Fecha de Publicación</label>
+        <input type="date" id="publishDate" formControlName="publishDate">
+    </div>
+
+    <!-- Radio-buttons para seleccionar una opción entre varias -->
+
+    <div>
+        <label for="category">Categoría</label>
+        <div>
+            <label for="novela">Novela</label>
+            <input id="novela" value="novela" type="radio" formControlName="category">
+
+            <label for="romance">Romance</label>
+            <input id="romance" value="romance" type="radio" formControlName="category">
+
+            <label for="educacion">Educación</label>
+            <input id="educacion" value="educacion" type="radio" formControlName="category">
+        </div>
+    </div>
+<!-- Selector simple:
+ideal para permitir elegir unaopción de muchas opciones porque a priori
+no hay un número fijo, puede hacer muchas porque normalmente
+vienen de bases de datos, por ejemplo autores -->
+<div>
+    <label form="author">Autor/a del libro</label>
+    <select id="author" formControlName="author">
+        <!-- Las option se imprimirian con un bucle for -->
+        <option value="">Selecciona una persona</option>
+        <option value="Paco Garcia">Paco Garcia</option>
+        <option value="Maria Perez">Maria Perez </option>
+        <option value="Teresa Campos">Teresa Campos</option>
+
+    </select>
+</div>
+
+<!-- Selector múltiple:
+ideal para seleccionar multiples opciones dentro de un numero variable
+de opciones -->
+<div>
+    <label for="topics">Temáticas del libro</label>
+    <select id="topics" formControlName="topics" multiple>
+        <option value="">Selecciona una temática</option>
+        <option value="Medieval">Medieval</option>
+        <option value="Aventura">Aventura</option>
+        <option value="Romance">Romance</option>
+        <option value="Ficcion">Ficcion</option>
+        <option value="Futurista">Futurista</option>
+    </select>
+
+    <div>
+        <small>Ctrl + clic para seleccionar mas de una temática</small>
+    </div>
+
+</div>
+
+
+
+    <button type="submit">Enviar</button>
+
+</form>
