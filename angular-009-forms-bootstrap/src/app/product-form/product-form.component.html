@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <h1 class="mt-5">Creación de nuevo producto</h1>
+            <form class="mt-5" [formGroup]="productForm" (ngSubmit)="save()">
+
+                <!-- Campo oculto id -->
+                <input type="hidden" formControlName="id">
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="title" 
+                    placeholder="" formControlName="title">
+                    <label for="title">Titulo</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" min="0" step="0.01" class="form-control" 
+                    id="price" formControlName="price"
+                        placeholder="">
+                    <label for="title">Precio en Euros (€)</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox"
+                    id="available" formControlName="available">
+                    
+                    <label class="form-check-label" for="available">
+                    Disponible para la venta
+                    </label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                    <input type="datetime-local" class="form-control"
+                    id="publishDate" formControlName="publishDate"
+                    placeholder="">
+                    <label for="publishDate">Fecha de publicación</label>
+                    </div>
+
+                    
+                    <div class="form-floating mb-3">
+                        <select class="form-select" 
+                        id="manufacturer" 
+                        formControlName="manufacturer"
+                        aria-label="Fabricante">
+
+                        <option selected>Open this select menu</option>
+
+                        @for (manufacturer of manufactures; track manufacturer.id){
+                            <!-- [value]="manufacturer.id" -->
+                            <option [ngValue]="manufacturer">{{manufacturer.name}}</option>
+                        }
+                        
+                        </select>
+                        <label for="categories">Fabricante</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" 
+                        id="categories" 
+                        formControlName="categories"
+                        aria-label="Categorias" multiple
+                        style="min-height: 160px;">
+
+                        <option selected>Selecciona categorias</option>
+
+                        @for (category of categories; track category.id){
+                            <!-- [value]="manufacturer.id" -->
+                            <option [ngValue]="category">{{category.name}}</option>
+                        }
+                        
+                        </select>
+                        <label for="categories">Categorias</label>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">Enviar</button>
+                        <button class="btn btn-danger" type="button">Cancelar</button>
+                      </div>       
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

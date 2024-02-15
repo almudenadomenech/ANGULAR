@@ -45,3 +45,17 @@ no hace falta hacerlos todos de golpe.
 
 en el ts del componente en imports
 ReactiveFormsModule
+
+## ACTUALIZAR ANGULAR
+
+1. Desinstalar Angular:
+  npm uninstall -g @angular/cli
+
+2. Instalar la version:
+  npm install -g @angular/cli@17.2.0
+
+3. Crear proyecto:
+ng new angular-009-forms-bootstrap --skip-git --style=css --routing=true --ssr=false
+
+4. Boostrap:
+  ng add @ng-bootstrap/ng-bootstrap
