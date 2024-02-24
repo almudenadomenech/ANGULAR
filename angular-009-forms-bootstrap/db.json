@@ -2,11 +2,11 @@
   "products": [
     {
       "id": "1",
-      "title": "prueba producto",
+      "title": "producto clase modificado",
       "price": 4.99,
       "available": true,
       "publishDate": "2024-01-01T10:30",
-      "manufacture": {
+      "manufacturer": {
         "id": 1,
         "name": "pepsi",
         "year": 1920
@@ -14,45 +14,54 @@
       "categories": [
         {
           "id": 1,
-          "name": "vegan"
+          "name": "Bebidas"
+        },
+        {
+          "id": 2,
+          "name": "Carne"
         }
       ]
     },
     {
-      "id": 0,
-      "title": "La casa",
-      "price": 15423.25,
-      "available": false,
-      "publishDate": "2024-02-09T13:57",
-      "manufacturer": {
-        "id": 2,
-        "name": "Pepsi",
-        "year": 1920
-      },
+      "id": "0",
+      "title": "Producto 1 modificado",
+      "price": 50,
+      "available": true,
+      "publishDate": "2024-02-21T12:08",
+      "manufacturer": null,
       "categories": [
         {
           "id": 1,
           "name": "Bebidas"
         }
       ]
+    }
+  ],
+  "manufacturers":[
+    {
+      "id": 1,
+      "name": "FilaMotor",
+      "year": 2012
     },
     {
-      "id": 0,
-      "title": "La casa",
-      "price": 15423.25,
-      "available": false,
-      "publishDate": "2024-02-09T13:57",
-      "manufacturer": {
-        "id": 2,
-        "name": "Pepsi",
-        "year": 1920
-      },
-      "categories": [
-        {
-          "id": 1,
-          "name": "Bebidas"
-        }
-      ]
+      "id": 2,
+      "name": "Ford",
+      "year": 1960 
+    },
+    {
+      "id": 3,
+      "name": "Seat",
+      "year": 1980
+    },
+    {
+      "id": 4,
+      "name": "Mercedes",
+      "year": 1920
+    },
+    {
+      "id": 5,
+      "name": "Audi",
+      "year": 1975
     }
   ]
 }

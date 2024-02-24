@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+      <h1 class="mt-5">Listado de productos <i class="bi bi-book"></i></h1>
+
+      <button class="btn btn-primary"
+      routerLink="/products/create">Crear producto</button>
+
+      <table class="table table-striped mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Título</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Disponible</th>
+            <th scope="col">Fecha publicación</th>
+            <th scope="col">Fabricante</th>
+            <th scope="col">Categorías</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(product of products; track product.id) {
+          <tr>
+            <td>{{product.id}}</td>
+            <td>{{product.title}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.available}}</td>
+            <td>{{product.publishDate | date:'dd/MM/yy'}}</td>
+
+            <!-- Asociación Many To One -->
+            <td>{{product.manufacturer.name}}</td>
+
+            <!-- Asociación Many To Many requiere bucle for -->
+            <td>
+              @for (category of product.categories; track category.id) {
+              <span class="me-2">{{category.name}}</span>
+              }
+            </td>
+
+            <td>
+              <button class="btn btn-success me-2" [routerLink]="['/products', product.id, 'detail']">
+                <i class="bi bi-eye"></i>
+                Ver detalle
+              </button>
+              <button class="btn btn-success me-2" [routerLink]="['/products', product.id, 'update']">
+                <i class="bi bi-pencil"></i>
+                Editar
+              </button>
+
+
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

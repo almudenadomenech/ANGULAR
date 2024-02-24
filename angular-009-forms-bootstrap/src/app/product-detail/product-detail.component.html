@@ -1,0 +1,85 @@
+
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-4 text-center">
+
+
+      <div>
+        <!--<p class="py-5">Este restaurante no tiene imagen de perfil.</p>-->
+        <img class="img-fluid" src="https://ui-avatars.com/api/?name=A&size=256">
+
+      </div>
+
+      @if(product){
+        <div>
+      <button class="btn btn-primary"
+      [routerLink]="['/products', product.id, 'update']" >Editar producto</button>
+        </div>
+      }
+
+    </div>
+    <div class="col-8">
+
+      @if(product){
+      <div class="container px-4 py-5" id="icon-grid">
+        <h2 class="pb-2 border-bottom">Producto con id {{product.id}}</h2>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 py-5">
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-geo-alt text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Título</h3>
+              <p>{{product.title}}</p>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-phone text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Precio</h3>
+              <p>{{product.price}}</p>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-cup-straw text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Disponible</h3>
+              <p>{{product.available}}</p>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-cup-straw text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Fecha</h3>
+              <p>{{product.publishDate}}</p>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-cup-straw text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Fabricante</h3>
+              <p>{{product.manufacturer.name}}</p>
+            </div>
+          </div>
+
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-cup-straw text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Categorías</h3>
+              @for (category of product.categories; track category.id) {
+                <p>{{category.name}}</p>
+              }
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    } @else {
+      <p>Product no encontrado.</p>
+    }
+    </div>
+  </div>
+</div>
+
+

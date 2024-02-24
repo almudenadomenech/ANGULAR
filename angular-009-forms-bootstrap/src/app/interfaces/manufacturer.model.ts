@@ -1,7 +1,6 @@
-export interface Manufacturer{
+export interface Manufacturer {
    id: number;
    name: string;
    year: number;
-
-
-}
+ }
+ 
