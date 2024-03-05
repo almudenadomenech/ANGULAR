@@ -1,1 +1,55 @@
-<p>manufacturer-detail works!</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+
+      @if (manufacturer?.images) {
+        <ngb-carousel>
+          @for (image of manufacturer?.images; track image) {
+            <!-- En cada iteración se crea un slide representa una imagen en el carousel -->
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="image" alt="Random first slide" />
+              </div>
+              <div class="carousel-caption">
+                <h3>First slide label</h3>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              </div>
+            </ng-template>
+          }
+        </ngb-carousel>
+      }
+
+
+    </div>
+    <div class="col-8">
+
+      @if(manufacturer){
+      <div class="container px-4 py-5" id="icon-grid">
+        <h2 class="pb-2 border-bottom">Fabricante con id {{manufacturer.id}}</h2>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 py-5">
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-geo-alt text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Nombre</h3>
+              <p>{{manufacturer.name}}</p>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <i class="bi bi-phone text-info flex-shrink-0 me-3 fs-2"></i>
+            <div>
+              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Año de fundación</h3>
+              <p>{{manufacturer.year}}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    } @else {
+      <p>Restaurante no encontrado.</p>
+    }
+    </div>
+  </div>
+</div>
+

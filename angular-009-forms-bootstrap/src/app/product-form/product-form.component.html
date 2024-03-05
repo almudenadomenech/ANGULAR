@@ -1,13 +1,16 @@
+
 <div class="container">
   <div class="row">
     <div class="col">
 
-      <!-- Mostrar "creación" ó "actualización" si ya existe el producto -->
-      @if(isUpdate) {
-      <h1 class="mt-5">Actualizar/Editar producto existente</h1>
-      }@else {
-      <h1 class="mt-5">Creación nuevo producto</h1>
+      <!-- Mostrar "creación" o "actualización" si ya existe el producto -->
+      @if(isUpdate){
+        <h1 class="mt-5">Actualizar/Editar producto existente</h1>
+      } @else {
+        <h1 class="mt-5">Crear nuevo producto</h1>
       }
+
+
 
       <form class="mt-5" [formGroup]="productForm" (ngSubmit)="save()">
 
@@ -16,39 +19,58 @@
 
 
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="title" formControlName="title" placeholder="">
+          <input type="text" class="form-control" id="title" formControlName="title"
+          placeholder="">
           <label for="title">Título</label>
         </div>
 
         <div class="form-floating mb-3">
-          <input type="number" min="0" step="0.01" class="form-control" id="price" formControlName="price"
-            placeholder="">
+          <input type="number" min="0" step="0.01"
+          class="form-control" id="price" formControlName="price"
+          placeholder="">
           <label for="price">Precio en Euros (€)</label>
         </div>
 
         <div class="form-check mb-3">
-          <input class="form-check-input" type="checkbox" id="available" formControlName="available">
+          <input class="form-check-input" type="checkbox"
+          id="available" formControlName="available">
 
           <label class="form-check-label" for="available">
             Disponible para la venta
           </label>
         </div>
 
+        <!--
         <div class="form-floating mb-3">
-          <input type="datetime-local" class="form-control" id="publishDate" formControlName="publishDate"
-            placeholder="">
+          <input type="datetime-local" class="form-control"
+          id="publishDate" formControlName="publishDate"
+          placeholder="">
           <label for="publishDate">Fecha de publicación</label>
+        </div>
+        -->
+        <!-- Selector datepicker de NgBootstrap -->
+        <div class="input-group mb-3">
+          <input
+          class="form-control"
+          id="publishDate"
+          formControlName="publishDate"
+          ngbDatepicker
+          #d="ngbDatepicker">
+          <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
         </div>
 
         <div class="form-floating mb-3">
-          <select class="form-select" id="manufacturer" formControlName="manufacturer" aria-label="Fabricante"
-            [compareWith]="compareObjects">
+          <select class="form-select"
+          id="manufacturer"
+          formControlName="manufacturer"
+          aria-label="Fabricante"
+          [compareWith]="compareObjects">
 
             <option selected>Open this select menu</option>
 
             @for (manufacturer of manufacturers; track manufacturer.id) {
-            <!-- [value]="manufacturer.id" -->
-            <option [ngValue]="manufacturer">{{manufacturer.name}}</option>
+              <!-- [value]="manufacturer.id" -->
+              <option [ngValue]="manufacturer">{{manufacturer.name}}</option>
             }
 
           </select>
@@ -56,18 +78,19 @@
         </div>
 
         <div class="form-floating mb-3">
-          <select class="form-select" 
-          id="categories" 
-          formControlName="categories" 
-          aria-label="Categorias" multiple
-          style="min-height:160px;" 
+          <select class="form-select"
+          id="categories"
+          formControlName="categories"
+          aria-label="Categorias"
+          multiple
+          style="min-height:160px;"
           [compareWith]="compareObjects">
 
             <option selected>Selecciona categorías</option>
 
             @for (category of categories; track category.id) {
-            <!-- [value]="category.id" -->
-            <option [ngValue]="category">{{category.name}}</option>
+              <!-- [value]="category.id" -->
+              <option [ngValue]="category">{{category.name}}</option>
             }
 
           </select>

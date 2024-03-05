@@ -22,14 +22,15 @@ En angular.json hay que agregar el bootstrap-icons.min.css a styles:
               "src/styles.css"
             ],
 
-## PASO 5: LEVANTAR EL BACKEND
 
-En otra terminal
-json-server --watch db.json
-
-## PASO 6: CREAR COMPONENTES
+## PASO 5: CREAR COMPONENTES
 
 ng g c nombre del componente
+
+## PASO 6: CREAR INTERFACES
+
+1. Crear una carpeta dentro de app, llamada interfaces
+2. Crear las interfaces
 
 ## PASO 7: HACER EL ENRUTADO
 
@@ -37,9 +38,17 @@ Empezar con el list y luego detalle
 Se pueden ir enrutando a medida que crece el proyecto, 
 no hace falta hacerlos todos de golpe.
 
-## PASO 8: CREAR LA INTERFACES
-1. Crear una carpeta dentro de app
-2. Crear las rutas en el app.component.htm en el navbar
+## PASO 8: HACER EL JSON
+
+Se crea debajo de Angular.json
+
+## PASO 9: LEVANTAR FRONTEND
+
+ng serve -o
+
+## PASO 10: LEVANTAR BACKEND
+
+json-server db.json
 
 ## PASO 9: HACER FORMULARIOS
 
@@ -104,6 +113,36 @@ Objetivo: tener desarrollado un CRUD completo sobre productos.
 
 1. Enrutado:  
   * /products/: id/update se puede llegar al formulario
-  * /produ
-2. 
+  * /produt
+
+
+## USUARIOS
+
+## LOGIN
+
+1. ng g c login
+
+2. Rutal en app.routers.ts
+
+3. routerLink en la navbar o cualquier otra pantalla para poder llegar al login
+
+4. Crear interface login
+
+5. login component.ts
+
+6. login.component.html
+
+## REGISTRO
+
+ng g c register
+
+## USER LIST
+
+ng g c user-list
+
+## USER PROFILE
+
+ng g c user-profile
+
+
 
