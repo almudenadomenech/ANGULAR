@@ -44,7 +44,7 @@ export const routes: Routes = [
         component: RestaurantBookingComponent
     },
     {
-        path: 'not-found',
+        path: 'not-found-404',
         component: NotFoundComponent
     },
     {

@@ -144,5 +144,16 @@ ng g c user-list
 
 ng g c user-profile
 
+## CREAR FRONTEND Y BACKEND
 
+* Crear carpeta fullstack-001
 
+* Crear backend:
+1. nest new backend --skip-git --package-manager npm
+2. cd backend
+3. npm install --save @nestjs/typeorm typeorm mysql2 @nestjs/swagger
+
+* Crear frontend:
+1. ng new frontend --skip-git --style=css --routing=true --ssr=false
+2. cd frontend
+3. ng add @ng-bootstrap/ng-bootstrap
