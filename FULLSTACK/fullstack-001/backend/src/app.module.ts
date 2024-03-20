@@ -11,6 +11,7 @@ import { Editorial } from './editorial/editorial.model';
 import { User } from './user/user.model';
 import { Reservation } from './reservation/reservation.model';
 import { ReservationController } from './reservation/reservation.controller';
+import { CategoryController } from './category/category.controller';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { ReservationController } from './reservation/reservation.controller';
     TypeOrmModule.forFeature([Book, Author, Category, Editorial, User, Reservation]) // Esto permite acceder a Repository
     
   ],
-  controllers: [AppController, BookController, AuthorController, ReservationController],
+  controllers: [AppController, BookController, AuthorController, ReservationController, CategoryController],
   providers: [AppService],
 })
 export class AppModule {}

@@ -4,16 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
- /*  const config = new DocumentBuilder()
-.setTitle('APS API Documentation')
-.setDescription('Application API for APS Web App to upload and download applications')
-.setVersion('1.0')
-.addBearerAuth()
-.build(); */
-
-// Instalar Open API: npm install @nestjs/swagger
-
+  app.enableCors();
   const config = new DocumentBuilder().setTitle("BACKEND NEST").build()
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

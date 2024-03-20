@@ -157,3 +157,17 @@ ng g c user-profile
 1. ng new frontend --skip-git --style=css --routing=true --ssr=false
 2. cd frontend
 3. ng add @ng-bootstrap/ng-bootstrap
+
+## FRONTEND
+
+* interfaces con todos los model.ts
+
+* Crear componentes: home, navbar, footer, book-list, book-detail, book-form
+
+* Enrutado app.routers.ts
+
+* Desarrollar los componentes:
+
+  * book-list conectado a backend nestjs
+  * book-detail conectado a backend nestjs
+  * book-form conectado a backend nestjs

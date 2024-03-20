@@ -77,6 +77,7 @@ Backend sobre nodejs.
  8. ng generate controller Book
  9. Inyectar Repository en el BookController
 
+
  ## CONFIGURACIÓN BASE DE DATOS
 
 app.module.ts:
@@ -127,4 +128,14 @@ npm install @nestjs/swagger
 Modificar el main.ts para agregar la configuración de SwaggerModule
 
 Entrar en http://localhost:3000/api
+
+
+
+* Mostrar mensaje de borrado correctamente
+
+* Añadir botón de reserva
+
+* Pantalla reserva de libro
+
+* Mostrar libros filtrados por categoria
 

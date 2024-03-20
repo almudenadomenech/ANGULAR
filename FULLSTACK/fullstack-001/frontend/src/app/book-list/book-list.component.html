@@ -1,0 +1,90 @@
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+  
+        <h1 class="mt-5">Listado de libros</h1>
+  
+        <button class="btn btn-primary"
+        routerLink="/books/create">Crear libro</button>
+
+         <!-- Hacer que la alerta salga o no -->
+        @if (showDeletedMessage) {
+        <ngb-alert type="success" (closed)="closeMessage">Libro despublicado correctamente</ngb-alert>
+        }
+        <table class="table table-striped mt-5">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Título</th>
+              <th scope="col">Isbn</th>
+              <th scope="col">Número páginas</th>
+              <th scope="col">Publicado</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Autor</th>
+              <th scope="col">Editorial</th>
+              <th scope="col">Categorías</th>
+              <th scope="col">Acciones</th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            @for(book of books; track book.id) {
+            <tr>
+              <td>{{book.id}}</td>
+              <td>{{book.title}}</td>
+              <td>{{book.isbn}}</td>
+              <td>{{book.numPages}}</td>
+              <td>
+                @if (book.published) {
+                  <span class="badge text-bg-success">Sí</span>
+                } @else {
+                  <span class="badge text-bg-danger">No</span>
+                }
+              </td>
+              <td>{{book.price}}</td>
+  
+              <td>
+                <a [routerLink]="['/authors', book.author.id, 'detail']">
+                  {{book.author.firstName}}
+                </a>
+              </td>
+  
+              <td>
+                <a [routerLink]="['/editorials', book.editorial.id, 'detail']">
+                  {{book.editorial.name}}
+                </a>
+              </td>
+  
+              <td>
+                @for (category of book.categories; track category.id) {
+                  <a class="badge text-bg-secondary me-2"
+                  [routerLink]="['/categories', category.id, 'detail']">
+                    {{category.title}}
+                  </a>
+                }
+              </td>
+  
+              <td>
+                <button class="btn btn-info me-2 btn-sm" [routerLink]="['/books', book.id, 'detail']">
+                  Ver
+                </button>
+                <button class="btn btn-success me-2 btn-sm" [routerLink]="['/books', book.id, 'update']">
+                  Editar
+                </button>
+                <button class="btn btn-warning me-2 btn-sm" [routerLink]="['/books', book.id, 'reserve']">
+                  Reservar
+                </button>
+                <button class="btn btn-danger me-2 btn-sm" (click)="delete(book)">
+                  Despublicar
+                </button>
+  
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

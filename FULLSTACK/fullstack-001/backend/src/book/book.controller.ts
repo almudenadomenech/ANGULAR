@@ -139,8 +139,18 @@ export class BookController {
          }
 
         try {
-            this.bookRepository.delete(id);
+            // Opción 1. Borrar el libro
+            // Primero desasociar o borrar aquellas cosas que apunten al libro
+            // this.bookRepository.delete(id);
+
+            // Opciciòn 2: : Despublicar libro
+            const book = await this.bookRepository.findOne({
+                where: {id: id}
+            });
+            book.published = false;
+            await this.bookRepository.save(book);
         } catch (error) {
+            console.log("Error al borrar el libro")
             throw new ConflictException('No se puede borrar.');
         }
         

@@ -1,0 +1,85 @@
+@if(category) {
+    <div class="mt-5 text-center">
+      <!-- Recomendable imágenes cuadradas por ejemplo 500x500 -->
+      <img
+      class="d-block mx-auto mb-4 rounded-circle"
+      [src]="category.photo" alt="category"
+      style="max-width:150px;">
+  
+      <h1 class="display-5 fw-bold text-body-emphasis">{{category.title}}</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">{{category.description}}</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Editar</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+        </div>
+      </div>
+    </div>
+  }
+
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+  
+        <h2 class="mt-5">Libros de esta categoría</h2>
+        
+        <table class="table table-striped mt-5">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Título</th>
+              <th scope="col">Isbn</th>
+              <th scope="col">Número páginas</th>
+              <th scope="col">Publicado</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Autor</th>
+              <th scope="col">Editorial</th>
+              <th scope="col">Acciones</th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            @for(book of books; track book.id) {
+            <tr>
+              <td>{{book.id}}</td>
+              <td>{{book.title}}</td>
+              <td>{{book.isbn}}</td>
+              <td>{{book.numPages}}</td>
+              <td>
+                @if (book.published) {
+                  <span class="badge text-bg-success">Sí</span>
+                } @else {
+                  <span class="badge text-bg-danger">No</span>
+                }
+              </td>
+              <td>{{book.price}}</td>
+  
+              <td>
+                <a [routerLink]="['/authors', book.author.id, 'detail']">
+                  {{book.author.firstName}}
+                </a>
+              </td>
+  
+              <td>
+                <a [routerLink]="['/editorials', book.editorial.id, 'detail']">
+                  {{book.editorial.name}}
+                </a>
+              </td>
+             
+  
+              <td>
+                <button class="btn btn-success me-2" [routerLink]="['/books', book.id, 'detail']">
+                  Ver 
+                </button>
+               
+  
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

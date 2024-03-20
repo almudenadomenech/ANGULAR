@@ -9,10 +9,10 @@ export class Reservation {
     id: number;
 
     @Column({type: 'date'})
-    startDate;
+    startDate: Date;
 
     @Column({type: 'date'})
-    endDate;
+    endDate: Date;
 
     @Column({type: 'decimal', precision: 14, scale: 2})
     price: number;
