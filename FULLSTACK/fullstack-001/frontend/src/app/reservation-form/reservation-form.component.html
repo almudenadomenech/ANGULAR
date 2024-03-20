@@ -1,102 +1,109 @@
 
 
 <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-  
+  <div class="row">
+    <div class="col-lg-8">
+
+      @if (showConfirmMessage) {
+        <ngb-alert type="success">
+          Se ha completado tu reserva para el libro {{book?.title}}.
+
+          El libro será enviado en las próximas horas.
+        </ngb-alert>
+      } @else {
         <form class="mt-5"
         [formGroup]="reservationForm"
         (ngSubmit)="save()">
 
         <h1 class="mb-3">Reserva de libro</h1>
-  
-  
+
         <div class="form-floating mb-3">
           <input type="date" class="form-control"
           id="startDate" formControlName="startDate"
           placeholder="yyyy-mm-dd" (change)="calculatePrice()">
           <label for="startDate">Fecha inicio</label>
         </div>
-  
+
         <div class="form-floating mb-3">
           <input type="date" class="form-control"
           id="endDate" formControlName="endDate"
           placeholder="yyyy-mm-dd" (change)="calculatePrice()">
           <label for="endDate">Fecha fin</label>
         </div>
-  
+
           <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox"
             id="premiumShip" formControlName="premiumShip" (change)="calculatePrice()">
-  
+
             <label class="form-check-label" for="premiumShip">
               Envío premium 4,99 € (Menos de 24 horas)
             </label>
           </div>
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Finalizar reserva</button>  
-  
-          </form>
-  
-      </div>
-  
-      <div class="col-md-5 col-lg-4 order-md-last">
-        <h4 class="mt-5 d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Tu reserva</span>
-          <span class="badge bg-primary rounded-pill">{{numDays}} días</span>
-        </h4>
-        <ul class="list-group mb-3">
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Finalizar reserva</button>
 
-            @if (book) {
+          </form>
+
+      }
+
+    </div>
+
+    <div class="col-md-5 col-lg-4 order-md-last">
+      <h4 class="mt-5 d-flex justify-content-between align-items-center mb-3">
+        <span class="text-primary">Tu reserva</span>
+        <span class="badge bg-primary rounded-pill">{{numDays}} días</span>
+      </h4>
+      <ul class="list-group mb-3">
+        @if (book) {
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+          <div>
+              <h6 class="my-0">{{book.title}}</h6>
+              <small class="text-body-secondary">{{book.isbn}}</small>
+          </div>
+        </li>
+        }
+
+
+
+        @if(numDays > 0) {
           <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>             
-                <h6 class="my-0">{{book.title}}</h6>
-                <small class="text-body-secondary">{{book.isbn}}</small>
-              
+            <div>
+              <h6 class="my-0">Número días y precio día</h6>
+              <small class="text-body-secondary">{{book?.price}} por día de reserva</small>
             </div>
+            <span class="text-body-secondary">{{numDays}} x {{book?.price  | currency:'EUR':'symbol':'1.2-2'}}</span>
           </li>
         }
 
-          @if (reservationForm.get('premiumShip')?.value) {
+        @if (reservationForm.get('premiumShip')?.value) {
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h6 class="my-0">Envío premium</h6>
               <small class="text-body-secondary">Antes de 24 horas.</small>
             </div>
-            <span class="text-body-secondary">4.99 €</span>
+            <span class="text-body-secondary">4,99 €</span>
           </li>
         }
 
-    @if (numDays > 0) {
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Número de días y precio día</h6>
-              <small class="text-body-secondary">{{numDays}} por día de reserva</small>
-            </div>
-            <span class="text-body-secondary">{{numDays}} x {{book?.price | currency: 'EUR': 'symbol': '1.2-2'}}</span>
-          </li>
-    }
-          <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-            <div class="text-success">
-              <h6 class="my-0">Promo code</h6>
-              <small>EXAMPLECODE</small>
-            </div>
-            <span class="text-success">−$5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>{{price}}</strong>
-          </li>
-        </ul>
-  
-        <form class="card p-2">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Promo code">
-            <button type="submit" class="btn btn-secondary">Redeem</button>
+        <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
+          <div class="text-success">
+            <h6 class="my-0">Promo code</h6>
+            <small>EXAMPLECODE</small>
           </div>
-        </form>
-      </div>
+          <span class="text-success">−$5</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total (USD)</span>
+          <strong>{{price}}</strong>
+        </li>
+      </ul>
+
+      <form class="card p-2">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Promo code">
+          <button type="submit" class="btn btn-secondary">Redeem</button>
+        </div>
+      </form>
     </div>
   </div>
-  
-  
+</div>

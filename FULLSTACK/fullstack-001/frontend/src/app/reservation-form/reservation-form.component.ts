@@ -5,19 +5,21 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Book } from '../interfaces/book.model';
 import { Reservation } from '../interfaces/reservation.model';
 import { CurrencyPipe } from '@angular/common';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-reservation-form',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, ReactiveFormsModule, CurrencyPipe],
+  imports: [HttpClientModule, RouterLink, ReactiveFormsModule, CurrencyPipe, NgbAlert],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.css'
 })
-export class ReservationFormComponent implements OnInit{
+export class ReservationFormComponent implements OnInit {
 
   book: Book | undefined;
   price = 0;
   numDays = 0;
+  showConfirmMessage = false;
 
   reservationForm = new FormGroup({
     startDate: new FormControl<Date>(new Date()),
@@ -91,11 +93,14 @@ export class ReservationFormComponent implements OnInit{
     // enviar al backend con método POST
     this.httpClient.post<Reservation>('http://localhost:3000/reservation', reserva)
     .subscribe(reservation => {
-      
+      console.log(reservation);
+      this.showConfirmMessage = true;
+
     });
-    // this.httpClient.post
 
   }
 
 }
-
+// User --> User
+// Reservation --> Contract, Download, Booking, ....
+// Book --> Application, Budget, House, Product, Treatment

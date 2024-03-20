@@ -11,29 +11,28 @@ import { Book } from '../interfaces/book.model';
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css'
 })
-export class BookListComponent implements OnInit{
- 
+export class BookListComponent implements OnInit {
+
   books: Book[] = [];
   showDeletedMessage: boolean = false;
 
- constructor(private httpClient: HttpClient){}
+  constructor(private httpClient: HttpClient){}
 
   ngOnInit(): void {
-   this.loadBooks();
+    this.loadBooks();
   }
-  loadBooks(){
+  loadBooks() {
     this.httpClient.get<Book[]>('http://localhost:3000/book')
-    .subscribe(booksFromBackend => this.books = booksFromBackend)
+    .subscribe(booksFromBackend => this.books = booksFromBackend);
   }
-  delete(book: Book){
+  delete(book: Book) {
     this.httpClient.delete('http://localhost:3000/book/' + book.id)
     .subscribe(response => {
-      this.showDeletedMessage = true
+      this.showDeletedMessage = true;
       this.loadBooks();
-  });
+    });
   }
   closeMessage() {
     this.showDeletedMessage = false;
   }
-
 }

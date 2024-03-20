@@ -7,7 +7,7 @@ export class Reservation {
 
     @PrimaryGeneratedColumn()
     id: number;
-
+    
     @Column({type: 'date'})
     startDate: Date;
 
@@ -17,10 +17,9 @@ export class Reservation {
     @Column({type: 'decimal', precision: 14, scale: 2})
     price: number;
 
- // asociación con usuario
     @ManyToOne(() => User, {eager: true})
     user: User;
-// asociación con book
+
     @ManyToOne(() => Book, {eager: true})
     book: Book;
 }

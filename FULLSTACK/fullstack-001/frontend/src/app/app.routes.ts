@@ -7,33 +7,32 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent
-    },
-    {
-        path: 'books',
-        component: BookListComponent
-    },
-    {
-        path: 'books/:id/detail',
-        component: BookDetailComponent
-    },
-    {
-        path: 'books/create',
-        component: BookFormComponent
-    },
-    {
-        path: 'books/:id/update',
-        component: BookFormComponent
-    },
-    {
-        path: 'categories/:id/detail',
-        component: CategoryDetailComponent
-    },
-    {
-        path: 'books/:id/reserve',
-        component: ReservationFormComponent
-    }
-   
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'books',
+    component: BookListComponent
+  },
+  {
+    path: 'books/:id/detail',
+    component: BookDetailComponent
+  },
+  {
+    path: 'books/create',
+    component: BookFormComponent
+  },
+  {
+    path: 'books/:id/update',
+    component: BookFormComponent
+  },
+  {
+    path: 'categories/:id/detail',
+    component: CategoryDetailComponent
+  },
+  {
+    path: 'books/:id/reserve',
+    component: ReservationFormComponent
+  }
 ];
