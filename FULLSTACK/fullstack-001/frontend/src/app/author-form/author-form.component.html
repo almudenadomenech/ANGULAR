@@ -1,0 +1,36 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+
+            <h1 class="my-5">Crear nuevo autor</h1>
+
+            <form [formGroup]="authorForm" (submit)="save()">
+               
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                    placeholder="">
+                    <label for="firstName">Nombre</label>
+                </div> 
+
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="photoUrl"> Subir Foto</label>
+                    <input type="file" class="form-control" id="photoUrl" (change)="onFileChange($event)">
+                    </div>
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Guardar</button>
+                
+
+            </form>
+
+        </div>
+        <div class="col-lg-8">
+            @if (photoPreview) {
+                <h3 class="my-5">Previsualización</h3>
+                <img class="img-fluid" [src]="photoPreview">
+            }
+        </div>
+    </div>
+
+</div>
