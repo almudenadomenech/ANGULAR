@@ -7,20 +7,21 @@ import { Repository } from 'typeorm';
 export class CategoryController {
 
     constructor(
-        @InjectRepository(Category) private categoryRepository: Repository<Category>
+        @InjectRepository(Category) private categoryRepo: Repository<Category>
     ){}
+
     @Get()
     findAll() {
-        return this.categoryRepository.find();
+        return this.categoryRepo.find();
     }
 
-    @Get(':id') // :id es una variable, parámetro en la url
-    findById(@Param('id', ParseIntPipe) id: number ) {
-        return this.categoryRepository.findOne({
-          
+    @Get(':id')
+    findById( @Param('id', ParseIntPipe) id: number ) {
+        return this.categoryRepo.findOne({
             where: {
                 id: id
             }
         });
     }
+    
 }

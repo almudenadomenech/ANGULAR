@@ -13,4 +13,3 @@ import { FooterComponent } from "./footer/footer.component";
 export class AppComponent {
   title = 'frontend';
 }
-

@@ -1,7 +1,6 @@
 export interface Editorial {
-    id: number;
-    name: string;
-    cif: string;
-    year: number;
-  }
-  
+  id: number;
+  name: string;
+  cif: string;
+  year: number;
+}

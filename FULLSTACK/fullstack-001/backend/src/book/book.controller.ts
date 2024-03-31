@@ -18,34 +18,33 @@ export class BookController {
     }
 
     @Get(':id') // :id es una variable, parámetro en la url
-    findById(@Param('id', ParseIntPipe) id: number ) {
+    findById( @Param('id', ParseIntPipe) id: number ) {
         return this.bookRepository.findOne({
-            /* relations: {
-                author: true
-            }, */
+            // relations: {
+            //    author: true
+            // },
             where: {
                 id: id
             }
         });
     }
-    // Traer en nuestro caso todas las reservas de un usuario o todos los comentarios de un usuario.
-    // Filtar libros por autor.
-    // Sirve para la pantalla de author-detail para mostrar los libros del autor.
+
+    // Sirve para la pantalla de author-detail para mostrar los libros del autor
+    // Filtrar libros por autor
     @Get('filter-by-author/:id')
-    findByAuthorId(@Param('id', ParseIntPipe) id: number) {
-       return this.bookRepository.find({
-        
+    findByAuthorId(@Param('id', ParseIntPipe) id:number) {
+        return this.bookRepository.find({
             where: {
                 author: {
                     id: id
                 }
             }
         });
-}
+    }
 
-    // Filtrar por editorial
+    // filtrar por editorial
     @Get('filter-by-editorial/:id')
-    findByEditorialId(@Param('id', ParseIntPipe) id: number){
+    findByEditorialId(@Param('id', ParseIntPipe) id:number) {
         return this.bookRepository.find({
             where: {
                 editorial: {
@@ -55,18 +54,17 @@ export class BookController {
         });
     }
 
-    // Filtrar por categoria
+    // Filtrar por categoría
     @Get('filter-by-category-id/:id')
-    findByCategoryId(@Param('id', ParseIntPipe) id: number){
+    findByCategoryId(@Param('id', ParseIntPipe) id:number) {
         return this.bookRepository.find({
             where: {
                 categories: {
-                id: id
+                    id: id
                 }
             }
         });
     }
-
 
 
     @Get('filter-by-title/:title')
@@ -139,18 +137,19 @@ export class BookController {
          }
 
         try {
-            // Opción 1. Borrar el libro
+            // Opción 1: Borrar el libro
             // Primero desasociar o borrar aquellas cosas que apunten al libro
             // this.bookRepository.delete(id);
 
-            // Opciciòn 2: : Despublicar libro
+            // Opción 2: Despublicar libro
             const book = await this.bookRepository.findOne({
                 where: {id: id}
             });
             book.published = false;
             await this.bookRepository.save(book);
+            
         } catch (error) {
-            console.log("Error al borrar el libro")
+            console.log("Error al borrar el libro");
             throw new ConflictException('No se puede borrar.');
         }
         

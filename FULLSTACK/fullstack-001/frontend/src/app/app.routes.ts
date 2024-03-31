@@ -7,6 +7,7 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 import { AuthorListComponent } from './author-list/author-list.component';
 import { AuthorFormComponent } from './author-form/author-form.component';
+import { AuthorDetailComponent } from './author-detail/author-detail.component';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,15 @@ export const routes: Routes = [
   },
   {
     path: 'authors/create',
-   component: AuthorFormComponent
+    component: AuthorFormComponent
+  },
+  {
+    path: 'authors/:id/update',
+    component: AuthorFormComponent
+  },
+  {
+    path: 'authors/:id/detail',
+    component: AuthorDetailComponent
   }
+
 ];

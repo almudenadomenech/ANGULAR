@@ -1,13 +1,13 @@
-import { Category } from "src/category/category.model";
+import { ApiProperty } from "@nestjs/swagger";
 import { Author } from "src/author/author.model";
+import { Category } from "src/category/category.model";
 import { Editorial } from "src/editorial/editorial.model";
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class Book {
 
-    @ApiProperty() // para testear en API
+    @ApiProperty()
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -39,26 +39,25 @@ export class Book {
     @Column({type: 'decimal', precision: 14, scale: 2})
     price: number;
 
-    // asosciaciones: ManyToOne, Many to Many
-   // @ManyToOne(() => Author)
-    
-    // eager true: hace que traiga la asociación en las consultas. DESACONSEJADO en aplicaciones grandes.
-    // eager false: hace que no taiga la aplicación, RECOMENDADO en aplicaciones grandes para optimizar consultas.
+    // Asociaciones: ManyToOne, Many To Many
+    // @ManyToOne(() => Author)
+    // eager: true hace que traiga la asociación en las consultas. 
+        // DESACONSEJADO en aplicaciones grandes
+
+    // eager: false hace no que no traiga la asociación, 
+        // RECOMENDADO en aplicaciones grandes para optimizar consultas
     @ApiProperty({example: {id: 1}})
-    @ManyToOne(() => Author, {eager: true})
-    author: Author ;
+    @ManyToOne(() => Author, { eager: true })
+    author: Author;
 
     @ApiProperty({example: {id: 1}})
     @ManyToOne(() => Editorial, {eager: true})
-    @JoinColumn({name: 'id_editorial'}) // opcional, cambia el nombre de la columna en la base de datos
+    @JoinColumn({name: 'id_editorial'}) // opcional, cambia el nombre
     editorial: Editorial;
 
-
-    // Asociacion Many To Many
-    @ApiProperty({example: [{id: 2}]}) // para testear u ejemplo de array en API
-    @ManyToMany(() => Category, {eager: true})
+    @ApiProperty({example: [{id: 1}]})
+    @ManyToMany(() => Category, { eager: true })
     @JoinTable()
-    categories: Category[];// varias categorias
-
+    categories: Category[]; // varias categorías
 
 }
