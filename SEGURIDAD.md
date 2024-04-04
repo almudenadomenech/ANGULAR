@@ -8,3 +8,14 @@ npm install @nestjs/jwt @nestjs/passport passport passport-jwt bcrypt
 
 * login
 * register
+
+En el FRONTEND:
+
+libreria para decodificar el token en el frontend
+
+npm install jwt-decode
+
+En authentication:
+ng generate guard authentication/role
+dejar por defecto en la pregunta que te hace. Enter y ya está.
+Se crea un archivo role.guards.ts en la carpeta.

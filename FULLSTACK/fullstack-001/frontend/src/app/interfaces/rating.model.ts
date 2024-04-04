@@ -5,7 +5,7 @@ export interface Rating {
   id: number;
   score: number;
   comment: string;
-  createdDate: Date;
+  createdDate?: Date;
   user?: User;
   book?: Book;
 }

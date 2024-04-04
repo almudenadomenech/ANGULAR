@@ -75,9 +75,9 @@
       <h2 class="mt-5">Comentarios y valoraciones</h2>
 
         <!-- Formulario para crear un nuevo comentario -->
-        <form [formGroup]="ratingForm">
+        <form [formGroup]="ratingForm" (ngSubmit)="save()">
 
-          <div class="input-group mb-3">
+         <!-- <div class="input-group mb-3">
             <span class="input-group-text">
               <i class="bi bi-star-fill fs-3" style="color:#ffb900;"></i>
             </span>
@@ -86,6 +86,14 @@
               placeholder="0-5" formControlName="score" max="5" min="0" step="1">
               <label for="score">Puntuación</label>
             </div>
+          </div>-->
+
+          <div class="mb-3">
+            <ngb-rating  formControlName="score" [max]="5">
+              <ng-template let-fill="fill" let-index="index">
+                <i class="bi-star{{ fill === 100 ? '-fill' : '' }} fs-3" style="color:#ffb900;"></i>
+              </ng-template>
+            </ngb-rating>
           </div>
 
           <div class="form-floating">
@@ -94,6 +102,7 @@
             <label for="comment">Comentario de texto</label>
           </div>
 
+          <button class="w-100 btn btn-success btn-lg" type="submit">Añadir comentario</button>
         </form>
 
     </div>

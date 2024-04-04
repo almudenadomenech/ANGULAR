@@ -43,6 +43,9 @@ export class RatingController {
                 book: {
                     id: id
                 }
+            },
+            order: {
+                createdDate: "DESC"
             }
         });
     }

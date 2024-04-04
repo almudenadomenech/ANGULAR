@@ -16,9 +16,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { extname } from 'path';
 import { Rating } from './rating/rating.model';
 import { RatingController } from './rating/rating.controller';
+import { UserController } from './user/user.controller';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
+    JwtModule.register({
+      secret: 'admin',
+      signOptions: {expiresIn: '7d'}
+    }),
     MulterModule.register({
       storage: diskStorage({
         // carpeta destino donde guardar los archivos
@@ -45,7 +51,7 @@ import { RatingController } from './rating/rating.controller';
     TypeOrmModule.forFeature([Book, Author, Category, Editorial, User, Reservation, Rating]) // Esto permite acceder a Repository
     
   ],
-  controllers: [BookController, AuthorController, ReservationController, CategoryController, RatingController],
+  controllers: [BookController, AuthorController, ReservationController, CategoryController, RatingController, UserController],
   providers: [],
 })
 export class AppModule {}

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { Book } from '../interfaces/book.model';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'app-book-list',
@@ -15,8 +16,12 @@ export class BookListComponent implements OnInit {
 
   books: Book[] = [];
   showDeletedMessage: boolean = false;
+  isAdmin = false;
 
-  constructor(private httpClient: HttpClient){}
+  constructor(private httpClient: HttpClient,
+    private authService: AuthenticationService){
+      this.authService.isAdmin.subscribe(isAdmin => this.isAdmin = isAdmin);
+    }
 
   ngOnInit(): void {
     this.loadBooks();

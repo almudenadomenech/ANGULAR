@@ -5,8 +5,10 @@
 
       <h1 class="mt-5">Listado de libros</h1>
 
+      @if (isAdmin) {
       <button class="btn btn-primary"
       routerLink="/books/create">Crear libro</button>
+      }
 
       @if (showDeletedMessage) {
         <ngb-alert type="success" (closed)="closeMessage()">Libro despublicado correctamente.</ngb-alert>
@@ -65,19 +67,23 @@
             </td>
 
             <td>
-              <button class="btn btn-info me-2 btn-sm" [routerLink]="['/books', book.id, 'detail']">
-                Ver
-              </button>
+             
+              @if (isAdmin) {
               <button class="btn btn-success me-2 btn-sm" [routerLink]="['/books', book.id, 'update']">
                 Editar
               </button>
-              <button class="btn btn-warning me-2 btn-sm" [routerLink]="['/books', book.id, 'reserve']">
-                Reservar
-              </button>
+             
               <button class="btn btn-danger me-2 btn-sm" (click)="delete(book)">
                 Despublicar
               </button>
-
+            }
+            
+            <button class="btn btn-info me-2 btn-sm" [routerLink]="['/books', book.id, 'detail']">
+              Ver
+            </button>
+            <button class="btn btn-warning me-2 btn-sm" [routerLink]="['/books', book.id, 'reserve']">
+              Reservar
+            </button>
             </td>
           </tr>
           }

@@ -50,4 +50,19 @@ export class BookDetailComponent implements OnInit{
     });
   }
 
+  save (){
+    const rating: Rating = {
+      id: 0,
+      score: this.ratingForm.get('score')?.value ?? 0,
+      comment: this.ratingForm.get('comment')?.value ?? '',
+      book: this.book
+    }
+    this.httpClient.post<Rating>('http://localhost:3000/rating', rating)
+    .subscribe(rating => {
+      this.ratingForm.reset();
+      this.httpClient.get<Rating[]>('http://localhost:3000/rating/filter-by-book/'+ this.book?.id)
+      .subscribe(ratings => this.ratings = ratings);
+    });
+  }
+
 }

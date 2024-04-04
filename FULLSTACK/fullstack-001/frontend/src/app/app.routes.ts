@@ -8,6 +8,8 @@ import { ReservationFormComponent } from './reservation-form/reservation-form.co
 import { AuthorListComponent } from './author-list/author-list.component';
 import { AuthorFormComponent } from './author-form/author-form.component';
 import { AuthorDetailComponent } from './author-detail/author-detail.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
   {
@@ -53,6 +55,14 @@ export const routes: Routes = [
   {
     path: 'authors/:id/detail',
     component: AuthorDetailComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 
 ];
