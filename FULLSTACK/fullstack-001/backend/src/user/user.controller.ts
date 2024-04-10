@@ -7,6 +7,7 @@ import { Role } from './role.enum';
 import { Login } from './login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
+import * as bcrypt from 'bcrypt' // agregarlo manual
 
 @Controller('user')
 export class UserController {
@@ -27,11 +28,14 @@ export class UserController {
         if(exists)
             throw new ConflictException("Email ocupado");
 
+        // cifrar contraseña. El 10 es la fuerza de cifrado
+        //const password = bcrypt.hashSync(register.password, 10);
+
         // crear usuario en base de datos
         const user: User = {
             id: 0,
             email: register.email,
-            password: register.password,
+            password: register.password, // para el cifrado password: password
             phone: null,
             role: Role.USER,
             addressStreet: null
@@ -49,6 +53,10 @@ export class UserController {
         const exists = await this.userRepository.existsBy({
             email: login.email
         });
+
+        // comparar contraseñas
+        
+
         if(!exists)
             throw new NotFoundException("Usuario no encontrado."); // 404 
 
@@ -60,6 +68,11 @@ export class UserController {
         });
 
         // Comparar contraseñas
+        // IMPORTANTE: la contraseña de la base de datos está CIFRADA con bcrypt
+
+       /*   if (!bcrypt.compareSync(login.password, user.password)){
+            throw new UnauthorizedException("Credenciales incorrectas")
+        } */
         if (user.password !== login.password) {
             throw new UnauthorizedException("Credenciales incorrectas"); // 401
         }
