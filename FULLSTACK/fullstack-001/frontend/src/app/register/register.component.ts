@@ -2,11 +2,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Register } from '../interfaces/register.model';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -21,9 +22,12 @@ export class RegisterComponent {
   },
   {validators: this.passwordConfirmValidator} // Validador personalizado para comprobar que las contraseñas son iguales
   );
+  
+  error = '';
 
   constructor(private fb: FormBuilder,
-    private httpClient: HttpClient) {}
+    private httpClient: HttpClient,
+    private router: Router) {}
 
     // Método personalizado para validar si la contraseña es igual a la confirmación de contraseña
   passwordConfirmValidator(control: AbstractControl){
@@ -46,10 +50,18 @@ export class RegisterComponent {
     };
 
     let url = 'http://localhost:3000/user/register';
-    this.httpClient.post<Register>(url, register)
-                    .subscribe(res => {
-                      console.log(res);
-                    });
+    this.httpClient.post<Register>(url, register).subscribe({
+
+      next: data => {
+        this.router.navigate(['/login']);
+      },
+      error: error => {
+        if (error.status == 409){
+          this.error = 'Email ocupado';
+        }
+
+      }
+    });
 
 
   }

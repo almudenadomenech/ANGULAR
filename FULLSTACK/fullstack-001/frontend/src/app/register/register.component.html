@@ -77,6 +77,10 @@
       @if (registerForm.invalid) {
         <small class="text-danger">Debes completar de forma correcta todos los campos para poder guardar.</small>
       }
+
+      @if (error) {
+        <small class="text-danger">{{error}}</small>
+      }
   
       <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
     </form>
