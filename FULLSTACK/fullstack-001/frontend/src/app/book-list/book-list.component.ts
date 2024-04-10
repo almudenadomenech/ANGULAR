@@ -8,7 +8,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, NgbAlertModule],
+  imports: [RouterLink, NgbAlertModule],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css'
 })

@@ -8,7 +8,7 @@ import { Category } from '../interfaces/category.model';
 @Component({
   selector: 'app-author-detail',
   standalone: true,
-  imports: [HttpClientModule, RouterLink],
+  imports: [RouterLink],
   templateUrl: './author-detail.component.html',
   styleUrl: './author-detail.component.css'
 })

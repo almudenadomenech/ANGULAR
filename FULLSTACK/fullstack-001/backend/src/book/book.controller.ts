@@ -1,7 +1,9 @@
-import { Body, ConflictException, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Request, ConflictException, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UseGuards, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Book } from './book.model';
 import { Between, Repository, UpdateDateColumn } from 'typeorm';
+import { AuthGuard } from '@nestjs/passport';
+import { Role } from 'src/user/role.enum';
 
 @Controller('book')
 export class BookController {
@@ -13,11 +15,19 @@ export class BookController {
     
     // findAll y utilizar this.bookRepository.find()
     @Get()
-    findAll() {
+    @UseGuards(AuthGuard('jwt')) // Oblligatorio tener token JWT para acceder a este método
+    findAll(@Request() request) {
+
+        // al ser un método SECURIZADO tenemos acceso al user por lo que podemos usarlo para:
+        // Comprobar el rol del usuario
+        // Filtrar datos por usuario
+        console.log(request.user);
+        
         return this.bookRepository.find();
     }
 
     @Get(':id') // :id es una variable, parámetro en la url
+    @UseGuards(AuthGuard('jwt'))
     findById( @Param('id', ParseIntPipe) id: number ) {
         return this.bookRepository.findOne({
             // relations: {
@@ -97,8 +107,14 @@ export class BookController {
         });
     }
 
-    @Post()
-    create(@Body() book: Book) {
+    @Post() // para que solo el admin pueda guardar
+    @UseGuards(AuthGuard('jwt'))
+    create(@Request() request, @Body() book: Book) {
+
+        if(request.user.role !== Role.ADMIN)
+            throw new UnauthorizedException('sin permisos para crear');
+
+        // Obligatorio ser admin para poder guardar
         return this.bookRepository.save(book);
     }
 

@@ -3,6 +3,10 @@ export interface User {
   id: number;
   email: string;
   password: string;
+  addressStreet: string;
+  // addressPostalCode
+  // addressCity
+  // addressCountry
   phone: string;
   role: Role;
 }

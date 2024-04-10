@@ -1,7 +1,8 @@
-import { Body, Controller, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Rating } from './rating.model';
 import { Repository } from 'typeorm';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('rating')
 export class RatingController {
@@ -51,7 +52,12 @@ export class RatingController {
     }
 
     @Post()
-    create(@Body() rating: Rating) {
+    @UseGuards(AuthGuard('jwt'))
+    create(@Body() rating: Rating, @Request()request) {
+
+        // Extraer el user de la request
+        // asociar el user al rating antes de guardar
+        rating.user = request.user;
         return this.ratingRepo.save(rating);
     }
 

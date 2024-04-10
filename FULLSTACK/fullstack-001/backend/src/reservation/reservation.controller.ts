@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Request, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Reservation } from './reservation.model';
 import { Repository } from 'typeorm';
 import { log } from 'console';
+import { request } from 'http';
+import { Role } from 'src/user/role.enum';
 
 @Controller('reservation')
 export class ReservationController {
@@ -36,6 +38,25 @@ export class ReservationController {
                 }
             }
         });
+    }
+
+    // Este método es más seguro para obtener las reservas del usuario atenticado
+    @Get('filter-by-current-user')
+    findByCurrentUserId(@Request() request){
+
+        if(request.user.role === Role.ADMIN){
+            return this.reservationRepo.find();
+
+        }else {
+            return this.reservationRepo.find({
+                where: {
+                    user: {
+                        id: request.user.id
+                    }
+                }
+            });
+        }
+
     }
 
     @Get('filter-by-book/:id')

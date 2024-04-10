@@ -18,9 +18,12 @@ import { Rating } from './rating/rating.model';
 import { RatingController } from './rating/rating.controller';
 import { UserController } from './user/user.controller';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { JwtValidator } from './user/jwt.validator';
 
 @Module({
   imports: [
+    PassportModule,// Modulo de autentication
     JwtModule.register({
       secret: 'admin',
       signOptions: {expiresIn: '7d'}
@@ -52,6 +55,7 @@ import { JwtModule } from '@nestjs/jwt';
     
   ],
   controllers: [BookController, AuthorController, ReservationController, CategoryController, RatingController, UserController],
-  providers: [],
+ // Clase personalizada para validar y verificar token JWT
+  providers: [JwtValidator],
 })
 export class AppModule {}

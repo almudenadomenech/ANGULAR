@@ -1,4 +1,4 @@
-import { Body, ConflictException, Controller, NotFoundException, Post, UnauthorizedException } from '@nestjs/common';
+import { Body, ConflictException, Controller, Get, NotFoundException, Post, Put, Request, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { Register } from './register.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.model';
@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { Role } from './role.enum';
 import { Login } from './login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
 export class UserController {
@@ -31,8 +32,12 @@ export class UserController {
             id: 0,
             email: register.email,
             password: register.password,
-            phone: '',
-            role: Role.USER
+            phone: null,
+            role: Role.USER,
+            addressStreet: null
+            // addressPostalCode
+            // addressCity
+            // addressCountry
         };
         await this.userRepository.save(user);
     }
@@ -71,6 +76,27 @@ export class UserController {
         }
         return token;
 
+    }
+
+    // get Current User: Se utilizara en la pantalla mi perfil de frontend para enviar usuario.
+    @Get('account')
+    @UseGuards(AuthGuard('jwt'))
+    public getCurrentAccountUser(@Request() request){
+        // TODO quitar la contraseña antes de devolver el usuario
+        return request.user;
+    }
+    // update user
+
+    @Put()
+    @UseGuards(AuthGuard('jwt'))
+    public update(@Body() user: User, @Request() request){
+
+        if(request.user.role !== request.user.id){
+            // Si el usuario que actualiza no coincide con el usuario enviado
+            // Entonces no puede actualizar
+            throw new UnauthorizedException();
+        }
+        return this.userRepository.save(user);  
     }
     
 }

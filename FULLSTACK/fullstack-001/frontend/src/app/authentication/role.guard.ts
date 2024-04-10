@@ -2,7 +2,8 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 import { inject } from '@angular/core';
 
-export const roleGuard: CanActivateFn = (route, state) => {
+// Un guard que sirve para proteger rutas en base al rol del usuario.
+export const roleAdminGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthenticationService);
   const router = inject(Router);
 

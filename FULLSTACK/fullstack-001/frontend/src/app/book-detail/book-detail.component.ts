@@ -11,7 +11,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-book-detail',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, NgbRatingModule, DatePipe, ReactiveFormsModule],
+  imports: [RouterLink, NgbRatingModule, DatePipe, ReactiveFormsModule],
   //providers: [NgbRatingModule],
   templateUrl: './book-detail.component.html',
   styleUrl: './book-detail.component.css'

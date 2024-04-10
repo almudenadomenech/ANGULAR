@@ -15,6 +15,12 @@ export class User {
 
     @Column({nullable: true}) // opcional
     phone: string;
+    
+    @Column({nullable: true})
+    addressStreet: string;
+    // addressPostalCode
+    // addressCity
+    // addressCountry
 
     @Column({
         type: 'enum',
