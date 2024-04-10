@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -10,7 +10,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-reservation-form',
   standalone: true,
-  imports: [HttpClientModule, RouterLink, ReactiveFormsModule, CurrencyPipe, NgbAlert],
+  imports: [RouterLink, ReactiveFormsModule, CurrencyPipe, NgbAlert],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.css'
 })
@@ -97,7 +97,6 @@ export class ReservationFormComponent implements OnInit {
       console.log(reservation);
       this.showConfirmMessage = true;
       this.reservation = reservation;
-
     });
 
   }

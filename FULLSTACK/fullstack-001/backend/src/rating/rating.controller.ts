@@ -54,11 +54,10 @@ export class RatingController {
     @Post()
     @UseGuards(AuthGuard('jwt'))
     create(@Body() rating: Rating, @Request()request) {
-
         // Extraer el user de la request
         // asociar el user al rating antes de guardar
         rating.user = request.user;
-        return this.ratingRepo.save(rating);
+        return this.ratingRepo.save(rating);      
     }
 
     

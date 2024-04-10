@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Request, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Query, Request, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Reservation } from './reservation.model';
 import { Repository } from 'typeorm';
 import { log } from 'console';
-import { request } from 'http';
 import { Role } from 'src/user/role.enum';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('reservation')
 export class ReservationController {
@@ -40,14 +40,13 @@ export class ReservationController {
         });
     }
 
-    // Este método es más seguro para obtener las reservas del usuario atenticado
+    // Este método es más seguro para obtener las reservas del usuario autenticado
     @Get('filter-by-current-user')
-    findByCurrentUserId(@Request() request){
+    findByCurrentUserId(@Request() request) {
 
-        if(request.user.role === Role.ADMIN){
+        if (request.user.role === Role.ADMIN) {
             return this.reservationRepo.find();
-
-        }else {
+        } else {
             return this.reservationRepo.find({
                 where: {
                     user: {
@@ -57,7 +56,8 @@ export class ReservationController {
             });
         }
 
-    }
+    }   
+
 
     @Get('filter-by-book/:id')
     findByBookId(@Param('id', ParseIntPipe) id: number){
@@ -88,7 +88,11 @@ export class ReservationController {
     }
 
     @Post()
-    create(@Body() reservation: Reservation) {
+    @UseGuards(AuthGuard('jwt'))
+    create(@Body() reservation: Reservation, @Request() request) {
+        // extraer el usuario de la request
+        // asociar el usuario autenticado a la reserva
+        reservation.user = request.user;
         return this.reservationRepo.save(reservation);
     }
 

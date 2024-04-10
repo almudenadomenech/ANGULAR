@@ -5,16 +5,18 @@
     <div class="col-lg-8">
 
       @if (showConfirmMessage) {
-        <ngb-alert type="success" [dismissible]="false" class="mt-5" style="min-height: 200px">
-          Se ha completado tu reserva para el libro {{book?.title}}.          
-
+        <ngb-alert type="success" [dismissible]="false" class="mt-5" style="min-height:200px">
+          Se ha completado tu reserva para el libro {{book?.title}}.
+          <br>
           El libro será enviado en las próximas horas.
-          <br>El código de tu reserva es {{reservation?.id}}
-          <br> Para cualquier duda contacte con soporte&commat;certidevs.com
+          <br>
+          El código de tu reserva es: {{reservation?.id}}
+          <br>
+          Para cualquier duda, contacte con soporte en soporte&commat;certidevs.com
+          <!-- Ver referencias caracter en:
+          https://html.spec.whatwg.org/multipage/named-characters.html -->
         </ngb-alert>
         <button class="w-100 btn btn-primary btn-lg" routerLink="/books">Volver a libros</button>
-
-
       } @else {
         <form class="mt-5"
         [formGroup]="reservationForm"
