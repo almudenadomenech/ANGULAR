@@ -41,12 +41,17 @@ export class ReservationController {
     }
 
     // Este método es más seguro para obtener las reservas del usuario autenticado
+    @UseGuards(AuthGuard('jwt'))
     @Get('filter-by-current-user')
     findByCurrentUserId(@Request() request) {
+
+        // IMPORTANTE: verificar en frontend que el ADMIN ve todas las reservas y 
+        // el usuario no admin ve solo las suyas
 
         if (request.user.role === Role.ADMIN) {
             return this.reservationRepo.find();
         } else {
+            console.log(request.user.id);
             return this.reservationRepo.find({
                 where: {
                     user: {

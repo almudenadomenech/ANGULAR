@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+      <h1 class="mt-5">Listado de reservas</h1>
+
+      <table class="table table-striped mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Fecha inicio</th>
+            <th scope="col">Fecha fin</th>
+            <th scope="col">Precio</th>
+            @if (isAdmin) {
+              <th scope="col">Usuario</th>
+            }
+            <th scope="col">Libro</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(reservation of reservations; track reservation.id) {
+          <tr>
+            <td>{{reservation.id}}</td>
+            <td>{{reservation.startDate | date:'dd/MM/yy'}}</td>
+            <td>{{reservation.endDate | date:'dd/MM/yy'}}</td>
+            <td>{{reservation.price}} €</td>
+
+            @if (isAdmin) {
+            <td>
+              @if (reservation.user) {
+                <span class="badge text-bg-success">{{reservation.user.id}}</span>
+              } @else {
+                <span class="badge text-bg-danger">Sin usuario</span>
+              }
+            </td>
+            }
+            <td>
+              @if (reservation.book) {
+                <span class="badge text-bg-success">{{reservation.book.title}}</span>
+              } @else {
+                <span class="badge text-bg-danger">Sin libro</span>
+              }
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

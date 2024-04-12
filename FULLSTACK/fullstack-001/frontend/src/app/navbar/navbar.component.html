@@ -24,10 +24,9 @@
 					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button"> Libros </a>
 					<div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
 						<a ngbDropdownItem routerLink="/books" (click)="$event.preventDefault()">Listado libros</a>
-						<!-- Es if se pondría en todos los botones que no queramos que vea un usuario normal -->
-						@if(isAdmin){
-						<a ngbDropdownItem routerLink="/books/create" (click)="$event.preventDefault()">Crear libro</a>
-						}
+            @if (isAdmin) {
+              <a ngbDropdownItem routerLink="/books/create" (click)="$event.preventDefault()">Crear libro</a>
+            }
 					</div>
 				</li>
 
@@ -35,10 +34,9 @@
 					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown2" role="button"> Autores </a>
 					<div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-end">
 						<a ngbDropdownItem routerLink="/authors" (click)="$event.preventDefault()">Listado autores</a>
-
-						@if (isAdmin) {
-						<a ngbDropdownItem routerLink="/authors/create" (click)="$event.preventDefault()">Crear autor</a>
-						}
+            @if (isAdmin) {
+              <a ngbDropdownItem routerLink="/authors/create" (click)="$event.preventDefault()">Crear autor</a>
+            }
 					</div>
 				</li>
 
@@ -46,10 +44,9 @@
 					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button"> Categorías </a>
 					<div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
 						<a ngbDropdownItem routerLink="/categories" (click)="$event.preventDefault()">Listado categorías</a>
-
-						@if(isAdmin){
+            @if (isAdmin) {
 						<a ngbDropdownItem routerLink="/categories/create" (click)="$event.preventDefault()">Crear categoría</a>
-						}
+            }
 					</div>
 				</li>
 
@@ -57,25 +54,28 @@
 					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button"> Editoriales </a>
 					<div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
 						<a ngbDropdownItem routerLink="/editorials" (click)="$event.preventDefault()">Listado editoriales</a>
-
-						@if (isAdmin) {
+            @if (isAdmin) {
 						<a ngbDropdownItem routerLink="/editorials/create" (click)="$event.preventDefault()">Crear editorial</a>
-						}
+            }
 					</div>
 				</li>
 
+        @if (isLoggedIn) {
         <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
 					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button"> Reservas </a>
 					<div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
 						<a ngbDropdownItem routerLink="/reservations" (click)="$event.preventDefault()">Listado reservas</a>
+            @if (isAdmin) {
 						<a ngbDropdownItem routerLink="/reservations/create" (click)="$event.preventDefault()">Crear reserva</a>
+            }
 					</div>
 				</li>
+        }
 
         @if (userEmail) {
 
            <!-- <button class="btn btn-outline-success btn-sm mx-3">Cuenta {{userEmail.split('@')[0]}}</button> -->
-           <button class="btn btn-outline-success btn-sm mx-3" routerLink="/account">{{userEmail}}</button>
+           <button routerLink="/account" class="btn btn-outline-success btn-sm mx-3">{{userEmail}}</button>
 
         }
 

@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { roleAdminGuard } from './authentication/role.guard';
 import { AccountFormComponent } from './account-form/account-form.component';
+import { ReservationListComponent } from './reservation-list/reservation-list.component';
 
 export const routes: Routes = [
   {
@@ -55,7 +56,8 @@ export const routes: Routes = [
   },
   {
     path: 'authors/:id/update',
-    component: AuthorFormComponent
+    component: AuthorFormComponent,
+    canActivate: [roleAdminGuard]
   },
   {
     path: 'authors/:id/detail',
@@ -72,7 +74,10 @@ export const routes: Routes = [
   {
     path: 'account',
     component: AccountFormComponent
+  },
+  {
+    path: 'reservations',
+    component: ReservationListComponent
   }
-
 
 ];
