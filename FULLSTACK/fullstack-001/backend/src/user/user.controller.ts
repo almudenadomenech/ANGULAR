@@ -1,4 +1,4 @@
-import { Body, ConflictException, Controller, Get, NotFoundException, Post, Put, Request, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, ConflictException, Controller, Get, NotFoundException, Post, Put, Request, UnauthorizedException, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Register } from './register.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.model';
@@ -7,7 +7,8 @@ import { Role } from './role.enum';
 import { Login } from './login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
-import * as bcrypt from 'bcrypt' // agregarlo manual
+import * as bcrypt from 'bcrypt'; // npm install bcrypt
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('user')
 export class UserController {
@@ -26,22 +27,20 @@ export class UserController {
         });
 
         if(exists)
-            throw new ConflictException("Email ocupado");
+            throw new ConflictException("Email ocupado");// 409
 
-        // cifrar contraseña. El 10 es la fuerza de cifrado
-        //const password = bcrypt.hashSync(register.password, 10);
+        // Cifrar contraseña. El 10 es la fuerza de cifrado
+        const password = bcrypt.hashSync(register.password, 10);
 
         // crear usuario en base de datos
         const user: User = {
             id: 0,
             email: register.email,
-            password: register.password, // para el cifrado password: password
+            password: password,
             phone: null,
             role: Role.USER,
-            addressStreet: null
-            // addressPostalCode
-            // addressCity
-            // addressCountry
+            addressStreet: null,
+            photoUrl: null
         };
         await this.userRepository.save(user);
     }
@@ -53,10 +52,6 @@ export class UserController {
         const exists = await this.userRepository.existsBy({
             email: login.email
         });
-
-        // comparar contraseñas
-        
-
         if(!exists)
             throw new NotFoundException("Usuario no encontrado."); // 404 
 
@@ -68,13 +63,10 @@ export class UserController {
         });
 
         // Comparar contraseñas
-        // IMPORTANTE: la contraseña de la base de datos está CIFRADA con bcrypt
-
-       /*   if (!bcrypt.compareSync(login.password, user.password)){
-            throw new UnauthorizedException("Credenciales incorrectas")
-        } */
-        if (user.password !== login.password) {
-            throw new UnauthorizedException("Credenciales incorrectas"); // 401
+        // IMPORTANTE: la contraseña de base de datos está CIFRADA con bcrypt
+        //if (user.password !== login.password) {
+        if (! bcrypt.compareSync(login.password, user.password)) {
+            throw new UnauthorizedException("Credenciales incorrectas."); // 401
         }
 
         // Crear y devolver token de acceso (JWT)
@@ -91,25 +83,46 @@ export class UserController {
 
     }
 
-    // get Current User: Se utilizara en la pantalla mi perfil de frontend para enviar usuario.
+    // get Current User: se utilizará en la pantalla Mi Perfil de frontend
     @Get('account')
     @UseGuards(AuthGuard('jwt'))
-    public getCurrentAccountUser(@Request() request){
+    public getCurrentAccountUser(@Request() request) {
         // TODO quitar la contraseña antes de devolver el usuario
         return request.user;
     }
-    // update user
 
+
+
+    // update user: Actualiza el usuario se utiliza desde la pantalla Mi Perfil de frontend para enviar usuario
     @Put()
     @UseGuards(AuthGuard('jwt'))
-    public update(@Body() user: User, @Request() request){
+    public update(@Body() user: User, @Request() request) {
 
-        if(request.user.role !== request.user.id){
+        if (request.user.role !== Role.ADMIN && user.id !== request.user.id) {
             // Si el usuario que actualiza no coincide con el usuario enviado
-            // Entonces no puede actualizar
+            // entonces no puede actualizar 
             throw new UnauthorizedException();
         }
-        return this.userRepository.save(user);  
+
+        return this.userRepository.save(user);
+    }
+
+    // subir avatar
+    @Post('avatar')
+    @UseInterceptors(FileInterceptor('file'))
+    @UseGuards(AuthGuard('jwt'))
+    async uploadAvatar(
+        @UploadedFile() file: Express.Multer.File,
+        @Request() request
+    ) {
+        
+        if (!file) {
+            throw new BadRequestException('Archivo incorrecto');
+        }
+
+        // Guardar la ruta del archivo en un atributo del user
+        request.user.photoUrl = file.filename;
+        return await this.userRepository.save(request.user);
     }
     
 }

@@ -1,31 +1,37 @@
 <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-  
-        <h1 class="my-5">Mi perfil</h1>
-  
-        <form [formGroup]="userForm" (ngSubmit)="save()">
-  
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="phone" formControlName="phone"
-            placeholder="654321478">
-            <label for="phone">Teléfono</label>
-          </div>
-  
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="addressStreet" formControlName="addressStreet"
-            placeholder="Calle Falsa 2, 6D">
-            <label for="addressStreet">Dirección (calle, portal, piso, puerta)</label>
-          </div>
-  
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Guardar</button>
-  
-        </form>
-  
-      </div>
-      <div class="col-lg-4">
-  
-      </div>
+  <div class="row">
+    <div class="col-lg-8">
+
+      <h1 class="my-5">Mi perfil</h1>
+
+      <form [formGroup]="userForm" (ngSubmit)="save()">
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="phone" formControlName="phone"
+          placeholder="654321478">
+          <label for="phone">Teléfono</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="addressStreet" formControlName="addressStreet"
+          placeholder="Calle Falsa 2, 6D">
+          <label for="addressStreet">Dirección (calle, portal, piso, puerta)</label>
+        </div>
+
+        <!-- Agregar aquí más campos de usuario que se quiera poder editar -->
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Guardar</button>
+
+      </form>
+
+    </div>
+    <div class="col-lg-4">
+      <button class="w-100 btn btn-success btn-lg mt-5" type="button"
+      routerLink="/account/avatar">
+        <i class="bi bi-card-image me-2 fs-3"></i>
+        Cambiar avatar
+      </button>
+
     </div>
   </div>
-  
+</div>

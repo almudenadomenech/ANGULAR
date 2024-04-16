@@ -1,18 +1,16 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Author } from '../interfaces/author.model';
 import { Book } from '../interfaces/book.model';
 import { Reservation } from '../interfaces/reservation.model';
 import { Rating } from '../interfaces/rating.model';
-import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-book-detail',
   standalone: true,
   imports: [RouterLink, NgbRatingModule, DatePipe, ReactiveFormsModule],
-  //providers: [NgbRatingModule],
   templateUrl: './book-detail.component.html',
   styleUrl: './book-detail.component.css'
 })
@@ -24,11 +22,12 @@ export class BookDetailComponent implements OnInit{
   // formulario para crear nuevos comentarios
   ratingForm = new FormGroup({
     score: new FormControl(0),
-  comment: new FormControl('')
+    comment: new FormControl('')
   });
 
   constructor(private httpClient: HttpClient,
-    private activatedRoute: ActivatedRoute,) {}
+    private activatedRoute: ActivatedRoute) {
+    }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -45,12 +44,10 @@ export class BookDetailComponent implements OnInit{
 
       this.httpClient.get<Rating[]>('http://localhost:3000/rating/filter-by-book/'+ id)
       .subscribe(ratings => this.ratings = ratings);
-
-
     });
   }
 
-  save (){
+  save() {
     const rating: Rating = {
       id: 0,
       score: this.ratingForm.get('score')?.value ?? 0,
@@ -62,6 +59,24 @@ export class BookDetailComponent implements OnInit{
       this.ratingForm.reset();
       this.httpClient.get<Rating[]>('http://localhost:3000/rating/filter-by-book/'+ this.book?.id)
       .subscribe(ratings => this.ratings = ratings);
+    });
+  }
+
+  downloadFile() {
+    const url = 'http://localhost:3000/book/download/prueba/prueba'; // La URL de tu API
+    this.httpClient.get(url, {
+      responseType: 'blob',
+    }).subscribe(res => {
+      const blob = new Blob([res], { type: 'application/octet-stream' });
+
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = 'certidevs.exe';  // O el nombre que desees.
+      link.click();
+
+      window.URL.revokeObjectURL(downloadUrl);
+      link.remove();
     });
   }
 

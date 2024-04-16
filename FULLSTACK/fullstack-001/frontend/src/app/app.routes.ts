@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { roleAdminGuard } from './authentication/role.guard';
 import { AccountFormComponent } from './account-form/account-form.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
+import { AvatarFormComponent } from './avatar-form/avatar-form.component';
 
 export const routes: Routes = [
   {
@@ -78,6 +79,10 @@ export const routes: Routes = [
   {
     path: 'reservations',
     component: ReservationListComponent
+  },
+  {
+    path: 'account/avatar',
+    component: AvatarFormComponent
   }
 
 ];

@@ -1,14 +1,44 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-3">
+      <h3 style="margin-top:200px;">Filtros:</h3>
+
+      <h4>Categorías</h4>
+
+      @for (category of categories; track category.id) {
+        <a class="badge text-bg-success me-2 text-decoration-none"
+        [routerLink]="['/categories', category.id, 'detail']">
+          {{category.title}}
+        </a>
+      }
+
+      <h4 class="mt-4">Autores</h4>
+
+      @for (author of authors; track author.id) {
+        <div class="mb-1">
+            <a class="d-flex align-items-center badge text-bg-success me-2 text-decoration-none"
+            [routerLink]="['/authors', author.id, 'detail']">
+              @if (author.photoUrl) {
+                <img class="rounded-circle me-3" style="max-width:20px;"
+                [src]="'http://localhost:3000/uploads/' + author?.photoUrl">
+              }
+              {{author.firstName}}
+            </a>
+        </div>
+      }
+
+
+    </div>
+    <div class="col-9">
 
       <h1 class="mt-5">Listado de libros</h1>
 
-      @if (isAdmin) {
-      <button class="btn btn-primary"
-      routerLink="/books/create">Crear libro</button>
+      @if(isAdmin){
+        <button class="btn btn-primary"
+        routerLink="/books/create">Crear libro</button>
       }
+
 
       @if (showDeletedMessage) {
         <ngb-alert type="success" (closed)="closeMessage()">Libro despublicado correctamente.</ngb-alert>
@@ -59,7 +89,7 @@
 
             <td>
               @for (category of book.categories; track category.id) {
-                <a class="badge text-bg-secondary me-2"
+                <a class="badge text-bg-secondary me-2 text-decoration-none"
                 [routerLink]="['/categories', category.id, 'detail']">
                   {{category.title}}
                 </a>
@@ -67,23 +97,20 @@
             </td>
 
             <td>
-             
               @if (isAdmin) {
-              <button class="btn btn-success me-2 btn-sm" [routerLink]="['/books', book.id, 'update']">
-                Editar
+                <button class="btn btn-success me-2 btn-sm" [routerLink]="['/books', book.id, 'update']">
+                  Editar
+                </button>
+                <button class="btn btn-danger me-2 btn-sm" (click)="delete(book)">
+                  Despublicar
+                </button>
+              }
+              <button class="btn btn-info me-2 btn-sm" [routerLink]="['/books', book.id, 'detail']">
+                Ver
               </button>
-             
-              <button class="btn btn-danger me-2 btn-sm" (click)="delete(book)">
-                Despublicar
+              <button class="btn btn-warning me-2 btn-sm" [routerLink]="['/books', book.id, 'reserve']">
+                Reservar
               </button>
-            }
-            
-            <button class="btn btn-info me-2 btn-sm" [routerLink]="['/books', book.id, 'detail']">
-              Ver
-            </button>
-            <button class="btn btn-warning me-2 btn-sm" [routerLink]="['/books', book.id, 'reserve']">
-              Reservar
-            </button>
             </td>
           </tr>
           }

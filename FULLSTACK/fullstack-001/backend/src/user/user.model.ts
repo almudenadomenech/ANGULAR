@@ -15,9 +15,12 @@ export class User {
 
     @Column({nullable: true}) // opcional
     phone: string;
-    
-    @Column({nullable: true})
+
+    @Column({nullable: true}) // opcional
     addressStreet: string;
+
+    @Column({nullable: true}) // opcional
+    photoUrl: string;
     // addressPostalCode
     // addressCity
     // addressCountry

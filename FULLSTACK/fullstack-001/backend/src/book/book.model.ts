@@ -60,4 +60,7 @@ export class Book {
     @JoinTable()
     categories: Category[]; // varias categorías
 
+
+    //@Column("simple-array", {nullable: true})
+    //images?: string[];
 }

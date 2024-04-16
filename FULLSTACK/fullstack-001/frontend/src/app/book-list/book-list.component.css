@@ -1,0 +1,9 @@
+
+a.badge{
+    transition: 0.3s;
+  }
+  
+  a.badge:hover{
+    opacity: 0.6;
+  }
+  

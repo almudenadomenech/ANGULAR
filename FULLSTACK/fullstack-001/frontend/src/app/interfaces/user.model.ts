@@ -1,13 +1,12 @@
 
+
 export interface User {
   id: number;
   email: string;
   password: string;
-  addressStreet: string;
-  // addressPostalCode
-  // addressCity
-  // addressCountry
   phone: string;
+  addressStreet: string;
+  photoUrl: string;
   role: Role;
 }
 export enum Role {
