@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Book } from '../interfaces/book.model';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { Category } from '../interfaces/category.model';
@@ -21,13 +21,30 @@ export class BookListComponent implements OnInit {
   isAdmin = false;
   categories: Category[] = [];
   authors: Author[] = [];
-
+  
+;
   constructor(
     private httpClient: HttpClient,
-    private authService: AuthenticationService){
+    private authService: AuthenticationService,
+    private modalService: NgbModal){
       this.authService.isAdmin.subscribe(isAdmin => this.isAdmin = isAdmin);
 
     }
+    openModal(content: TemplateRef<any>, book: Book){
+      const modalRef= this.modalService.open(content, {
+        centered: true
+      });
+
+      modalRef.result.then(result => {
+        if(result === 'Aceptar'){
+          console.log('Ha pulsado despublicar libro');
+          this.delete(book);
+          
+        }
+      })
+    }
+
+    
 
   ngOnInit(): void {
     this.httpClient.get<Category[]>('http://localhost:3000/category')

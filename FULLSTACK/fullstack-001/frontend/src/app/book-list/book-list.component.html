@@ -101,7 +101,8 @@
                 <button class="btn btn-success me-2 btn-sm" [routerLink]="['/books', book.id, 'update']">
                   Editar
                 </button>
-                <button class="btn btn-danger me-2 btn-sm" (click)="delete(book)">
+                <button class="btn btn-danger me-2 btn-sm" 
+                (click)="openModal(content, book)">
                   Despublicar
                 </button>
               }
@@ -119,3 +120,20 @@
     </div>
   </div>
 </div>
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Despublicar libro</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>El libro seleccionado va a ser despublicado va a ser despublicado y
+      no será visible en el listado.
+      ¿Está de acuerdo?
+    </p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-success" (click)="modal.close('Aceptar')">Aceptar</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Cancelar')">Cancelar</button>
+	</div>
+</ng-template>
+
